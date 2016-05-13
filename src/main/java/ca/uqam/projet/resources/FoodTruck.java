@@ -5,19 +5,42 @@ import com.fasterxml.jackson.annotation.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class FoodTruck {
-  private int id;
-  private String contenu;
-  private String auteur;
+    
+private String type;
+private Geometry geometry;
+private Properties properties;
 
-  public FoodTruck(int id, String contenu, String auteur) {
-    this.id = id;
-    this.contenu = contenu;
-    this.auteur = auteur;
+  public FoodTruck() {
   }
-@JsonProperty("Heure_debut") String heureDebut;
+    public String getType() {
+        return type;
+    }
 
-  @JsonProperty public int getId() { return id; }
-  @JsonProperty public String getContenu() { return contenu; }
-  @JsonProperty public String getAuteur() { return auteur; }
+    public Properties getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Geometry getGeometry() {
+        return geometry;
+    }
+
+    public void setValue(Geometry geometry) {
+        this.geometry = geometry;
+    }
+
+    @Override
+    public String toString() {
+        return "FoodTruck{" + "type=" + type + ", geometry=" + geometry + ", properties=" + properties + '}';
+    }
+
+
 
 }
