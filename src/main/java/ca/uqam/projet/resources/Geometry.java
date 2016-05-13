@@ -8,9 +8,10 @@ package ca.uqam.projet.resources;
 public class Geometry {
 
     private String type;
-    private float coordinates[] = new float[2];
+    private float coordinates[];
 
     public Geometry() {
+        coordinates = new float[2];
     }
 
     public String getType() {
@@ -31,7 +32,7 @@ public class Geometry {
 
     @Override
     public String toString() {
-        return "Geometry{" + "type=" + type + ", coordinates=" + coordinates + '}';
+        return "Geometry{" + "type=" + type + ", X=" + coordinates[0] + ", Y=" + coordinates[1] + '}';
     }
 
 }

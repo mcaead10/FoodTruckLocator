@@ -7,15 +7,21 @@ package ca.uqam.projet.repositories;
 
 import ca.uqam.projet.resources.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FoodTruckList {
 
     private String type;
-    private List<FoodTruck> features;
+    private @JsonProperty("features") List<FoodTruck> features;
 
     public FoodTruckList() {
+         features = new ArrayList<FoodTruck>();
     }
 
     public String getType() {
@@ -30,8 +36,8 @@ public class FoodTruckList {
         return features;
     }
 
-    public void setFoodTruckList(List<FoodTruck> foodtrucklist) {
-        this.features = foodtrucklist;
+    public void setFoodTruckList(List<FoodTruck> features) {
+        this.features = features;
     }
 
     @Override

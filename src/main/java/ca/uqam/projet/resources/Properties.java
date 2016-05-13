@@ -5,86 +5,49 @@
  */
 package ca.uqam.projet.resources;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Properties {
 
-    private String name;
-    private String description;
-    private String date;
-    private String Heure_debut;
-    private String Heure_fin;
-    private String Lieu;
-    private String Camion;
-    private String Truckid;
+    private @JsonProperty("name") String name;
+    private @JsonProperty("description") String description;
+    private @JsonProperty("Date") String date;
+    private @JsonProperty("Heure_debut") String heuredebut;
+    private @JsonProperty("Heure_fin") String heurefin;
+    private @JsonProperty("Lieu") String lieu;
+    private @JsonProperty("Camion") String camion;
+    private @JsonProperty("Truckid") String truckid;
 
     public Properties() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getHeuredebut() {
+        return heuredebut;
     }
 
-    public String getHeure_debut() {
-        return Heure_debut;
-    }
-
-    public void setHeure_debut(String Heure_debut) {
-        this.Heure_debut = Heure_debut;
-    }
-
-    public String getHeure_fin() {
-        return Heure_fin;
-    }
-
-    public void setHeure_fin(String Heure_fin) {
-        this.Heure_fin = Heure_fin;
+    public String getHeurefin() {
+        return heurefin;
     }
 
     public String getLieu() {
-        return Lieu;
-    }
-
-    public void setLieu(String Lieu) {
-        this.Lieu = Lieu;
+        return lieu;
     }
 
     public String getCamion() {
-        return Camion;
-    }
-
-    public void setCamion(String Camion) {
-        this.Camion = Camion;
+        return camion;
     }
 
     public String getTruckid() {
-        return Truckid;
-    }
-
-    public void setTruckid(String Truckid) {
-        this.Truckid = Truckid;
+        return truckid;
     }
 
     @Override
     public String toString() {
-        return "Properties{" + "name=" + name + ", description=" + description + ", date=" + date + ", Heure_debut=" + Heure_debut + ", Heure_fin=" + Heure_fin + ", Lieu=" + Lieu + ", Camion=" + Camion + ", Truckid=" + Truckid + '}';
+        return "Properties{" + "name=" + name + ", description=" + description + ", date=" + date + ", heuredebut=" + heuredebut + ", heurefin=" + heurefin + ", lieu=" + lieu + ", camion=" + camion + ", truckid=" + truckid + '}';
     }
+
 }
