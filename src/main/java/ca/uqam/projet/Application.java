@@ -1,6 +1,8 @@
 package ca.uqam.projet;
 
 import ca.uqam.projet.repositories.FoodTruckList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -13,26 +15,16 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        //showList(foodTruckList);
-        
-       
-
-        /*
-         // SpringApplication.run(Application.class, args);
-         RestTemplate restTemplate = new RestTemplate();
-         //FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class); 
-         System.out.println("--------------------HEEEEEEEEEEEEEEEERE----------------------------1");
-         FoodTruck[] foodtruck = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruck[].class);
-         System.out.println("--------------------HEEEEEEEEEEEEEEEERE----------------------------2");
-         ArrayList<FoodTruck> foodTruckList = new ArrayList<>(Arrays.asList(foodtruck));
-         System.out.println("--------------------HEEEEEEEEEEEEEEEERE----------------------------3");
-         System.out.println(foodTruckList);
-         */
+        //Si besoin de le faire une fois au debut quand je roule le programme
+        GetFoodTruckList();
     }
-@Scheduled(fixedDelay=5000)
-    public void showList() { 
+
+    @Scheduled(cron = "0 0 0/12 * * *" )
+    public static void GetFoodTruckList() {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();
         FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
+        System.out.println("The time is now " + dateFormat.format(new Date())); //Test
         System.out.println(foodTruckList);
     }
 }
