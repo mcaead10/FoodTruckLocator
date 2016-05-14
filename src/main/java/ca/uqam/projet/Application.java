@@ -1,10 +1,10 @@
 package ca.uqam.projet;
 
 import ca.uqam.projet.repositories.FoodTruckList;
-import ca.uqam.projet.resources.FoodTruck;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
@@ -12,11 +12,10 @@ import org.springframework.web.client.RestTemplate;
 public class Application {
 
     public static void main(String[] args) {
-        // SpringApplication.run(Application.class, args);
-        RestTemplate restTemplate = new RestTemplate();
-        FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
-
-        System.out.println(foodTruckList);
+        SpringApplication.run(Application.class, args);
+        //showList(foodTruckList);
+        
+       
 
         /*
          // SpringApplication.run(Application.class, args);
@@ -29,5 +28,11 @@ public class Application {
          System.out.println("--------------------HEEEEEEEEEEEEEEEERE----------------------------3");
          System.out.println(foodTruckList);
          */
+    }
+@Scheduled(fixedDelay=5000)
+    public void showList() { 
+        RestTemplate restTemplate = new RestTemplate();
+        FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
+        System.out.println(foodTruckList);
     }
 }
