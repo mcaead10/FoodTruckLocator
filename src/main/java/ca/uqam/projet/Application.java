@@ -19,7 +19,7 @@ public class Application {
         GetFoodTruckList();
     }
 
-    @Scheduled(cron = "0 0 0/12 * * *" )
+    @Scheduled(cron = "0 0 0,12 * * *" )
     public static void GetFoodTruckList() {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();
