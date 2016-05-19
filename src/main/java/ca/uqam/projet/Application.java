@@ -39,11 +39,14 @@ public class Application {
         List<Object[]> foodTruckInfoList = new ArrayList< >();
         for (FoodTruck foodTruck : trucksList) {
             String foodTruckInfo[] = {foodTruck.getProperties().getTruckid(), foodTruck.getProperties().getCamion()};
-            foodTruckInfoList.add(foodTruckInfo);      
+            if (!foodTruckInfoList.contains(foodTruckInfo))
+            foodTruckInfoList.add(foodTruckInfo);   
+            
         }
-        jdbcTemplate.batchUpdate("INSERT INTO foodtrucks(camion, truckid) VALUES (?,?)", foodTruckInfoList);
+        System.out.println(foodTruckInfoList);
+       // jdbcTemplate.batchUpdate("INSERT INTO foodtrucks(camion, truckid) VALUES (?,?)", foodTruckInfoList);
         
         System.out.println("The time is now " + dateFormat.format(new Date())); //Test
-        System.out.println(foodTruckList);
+        //System.out.println(foodTruckList);
     }
 }
