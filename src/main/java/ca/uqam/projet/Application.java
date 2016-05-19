@@ -24,14 +24,15 @@ public class Application {
     }
  static @Autowired JdbcTemplate jdbcTemplate;
  
-    @Scheduled(cron = "0 0 0,12 * * *" )
+    @Scheduled(cron = "*/10 0 * * * *" )
     public static void GetFoodTruckList() {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();
         FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
-      //  jdbcTemplate.execute("DROP TABLE foodtruck IF EXISTS");
-       // jdbcTemplate.execute("CREATE TABLE foodtruck(" +
-           //     "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))");
+        jdbcTemplate.execute("DROP TABLE foodtrucks IF EXISTS");
+        jdbcTemplate.execute("CREATE TABLE foodtrucks(" +
+                "camion VARCHAR(255) NOT NULL, truckid VARCHAR(255) NOT NULL, PRIMARY KEY (truckid))"); 
+        
         System.out.println("The time is now " + dateFormat.format(new Date())); //Test
         System.out.println(foodTruckList);
     }
