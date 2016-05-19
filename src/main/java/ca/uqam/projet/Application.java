@@ -1,8 +1,11 @@
 package ca.uqam.projet;
 
 import ca.uqam.projet.repositories.FoodTruckList;
+import ca.uqam.projet.resources.FoodTruck;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,7 +34,14 @@ public class Application {
         FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
         jdbcTemplate.execute("DROP TABLE foodtrucks IF EXISTS");
         jdbcTemplate.execute("CREATE TABLE foodtrucks(" +
-                "camion VARCHAR(255) NOT NULL, truckid VARCHAR(255) NOT NULL, PRIMARY KEY (truckid))"); 
+                "camion VARCHAR(255) NOT NULL, truckid VARCHAR(255) NOT NULL, PRIMARY KEY (truckid));"); 
+        List<FoodTruck> trucksList = foodTruckList.getFoodTruckList();
+        List<Object[]> foodTruckInfoList = new ArrayList< >();
+        for (FoodTruck foodTruck : trucksList) {
+            String foodTruckInfo[] = {foodTruck.getProperties().getTruckid(), foodTruck.getProperties().getCamion()};
+            foodTruckInfoList.add(foodTruckInfo);      
+        }
+        jdbcTemplate.batchUpdate("INSERT INTO foodtrucks(camion, truckid) VALUES (?,?)", foodTruckInfoList);
         
         System.out.println("The time is now " + dateFormat.format(new Date())); //Test
         System.out.println(foodTruckList);
