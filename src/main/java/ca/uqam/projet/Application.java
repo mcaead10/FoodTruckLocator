@@ -22,10 +22,10 @@ public class Application {
         //Si besoin de le faire une fois au debut quand je roule le programme
         //GetFoodTruckList();
     }
- static @Autowired JdbcTemplate jdbcTemplate;
+ @Autowired JdbcTemplate jdbcTemplate;
  
-    @Scheduled(cron = "*/10 0 * * * *" )
-    public static void GetFoodTruckList() {
+    @Scheduled(cron = "*/10 * * * * *" )
+    public void GetFoodTruckList() {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();
         FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
