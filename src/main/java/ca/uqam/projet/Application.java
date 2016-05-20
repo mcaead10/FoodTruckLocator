@@ -17,36 +17,49 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @SpringBootApplication
 @EnableScheduling
 public class Application {
-   
-   
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
         //Si besoin de le faire une fois au debut quand je roule le programme
         //GetFoodTruckList();
     }
- @Autowired JdbcTemplate jdbcTemplate;
- 
-    @Scheduled(cron = "*/10 * * * * *" )
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @Scheduled(cron = "*/10 * * * * *")
     public void GetFoodTruckList() {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();
         FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
         jdbcTemplate.execute("DROP TABLE foodtrucks IF EXISTS");
-        jdbcTemplate.execute("CREATE TABLE foodtrucks(" +
-                "camion VARCHAR(255) NOT NULL, truckid VARCHAR(255) NOT NULL, PRIMARY KEY (truckid));"); 
+        jdbcTemplate.execute("CREATE TABLE foodtrucks("
+                + "camion VARCHAR(255) NOT NULL, truckid VARCHAR(255) NOT NULL, PRIMARY KEY (truckid));");
         List<FoodTruck> trucksList = foodTruckList.getFoodTruckList();
-        List<Object[]> foodTruckInfoList = new ArrayList< >();
+        List<Object[]> foodTruckInfoList = new ArrayList<>();
         for (FoodTruck foodTruck : trucksList) {
-            String foodTruckInfo[] = {foodTruck.getProperties().getTruckid(), foodTruck.getProperties().getCamion()};
-            if (!foodTruckInfoList.contains(foodTruckInfo))
-            foodTruckInfoList.add(foodTruckInfo);   
-            
+            if (needTobeAdd(foodTruckInfoList, foodTruck)) {
+                String foodTruckInfo[] = {foodTruck.getProperties().getTruckid(), foodTruck.getProperties().getCamion()};
+                foodTruckInfoList.add(foodTruckInfo);
+            }
         }
-        System.out.println(foodTruckInfoList);
-       // jdbcTemplate.batchUpdate("INSERT INTO foodtrucks(camion, truckid) VALUES (?,?)", foodTruckInfoList);
-        
+        for (Object[] objects : foodTruckInfoList) {
+            System.out.println(objects[0]);
+            System.out.println(objects[1]);
+            System.out.println("");
+        }
+        jdbcTemplate.batchUpdate("INSERT INTO foodtrucks(truckid, camion) VALUES (?,?)", foodTruckInfoList);
+
         System.out.println("The time is now " + dateFormat.format(new Date())); //Test
         //System.out.println(foodTruckList);
     }
+
+    public boolean needTobeAdd(List<Object[]> foodTruckInfoList, FoodTruck foodTruck) {
+        for (int i = 0; i < foodTruckInfoList.size(); i++) {
+            if (foodTruckInfoList.get(i)[0].equals(foodTruck.getProperties().getTruckid())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
