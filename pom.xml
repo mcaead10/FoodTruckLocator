@@ -36,5 +36,6 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <netbeans.hint.jdkPlatform>JDK_1.8</netbeans.hint.jdkPlatform>
   </properties>
 </project>

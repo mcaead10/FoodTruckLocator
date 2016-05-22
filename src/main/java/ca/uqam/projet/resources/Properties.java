@@ -21,6 +21,17 @@ public class Properties {
     public Properties() {
     }
 
+    Properties(String truckid, String camion) {
+        name = "";
+        description = "";
+        date = "";
+        heuredebut = "";
+        heurefin = "";
+        lieu = "";
+        this.camion = camion;
+        this.truckid = truckid;
+    }
+
     public String getDate() {
         return date;
     }

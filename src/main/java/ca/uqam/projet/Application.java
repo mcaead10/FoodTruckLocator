@@ -42,12 +42,11 @@ public class Application {
                 foodTruckInfoList.add(foodTruckInfo);
             }
         }
-        for (Object[] objects : foodTruckInfoList) {
-            System.out.println(objects[0]);
-            System.out.println(objects[1]);
-            System.out.println("");
-        }
         jdbcTemplate.batchUpdate("INSERT INTO foodtrucks(truckid, camion) VALUES (?,?)", foodTruckInfoList);
+
+        jdbcTemplate.query("SELECT * FROM foodtrucks",
+                (rs, rowNum) -> new FoodTruck(rs.getString("truckid"), rs.getString("camion"))
+        ).forEach(foodtruck -> System.out.println((foodtruck.toString())));
 
         System.out.println("The time is now " + dateFormat.format(new Date())); //Test
         //System.out.println(foodTruckList);

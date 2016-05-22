@@ -12,6 +12,13 @@ private Properties properties;
 
   public FoodTruck() {
   }
+  
+  public FoodTruck(String truckid, String camion) {
+      type = "";
+      geometry = null;
+      properties = new Properties(truckid, camion);
+  }
+  
     public String getType() {
         return type;
     }
