@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.*;
 
 public class FoodTruck {
     
-private String type;
 private Geometry geometry;
 private Properties properties;
 
@@ -14,14 +13,10 @@ private Properties properties;
   }
   
   public FoodTruck(String truckid, String camion) {
-      type = "";
       geometry = null;
       properties = new Properties(truckid, camion);
   }
-  
-    public String getType() {
-        return type;
-    }
+
 
     public Properties getProperties() {
         return properties;
@@ -29,10 +24,6 @@ private Properties properties;
 
     public void setProperties(Properties properties) {
         this.properties = properties;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Geometry getGeometry() {
@@ -45,7 +36,7 @@ private Properties properties;
 
     @Override
     public String toString() {
-        return "FoodTruck{" + "type=" + type + ", geometry=" + geometry + ", properties=" + properties + '}';
+        return "FoodTruck{" + "geometry=" + geometry + ", properties=" + properties + '}';
     }
 
 

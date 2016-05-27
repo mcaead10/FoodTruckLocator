@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Properties {
 
-    private @JsonProperty("name") String name;
-    private @JsonProperty("description") String description;
     private @JsonProperty("Date") String date;
     private @JsonProperty("Heure_debut") String heuredebut;
     private @JsonProperty("Heure_fin") String heurefin;
@@ -22,8 +20,6 @@ public class Properties {
     }
 
     Properties(String truckid, String camion) {
-        name = "";
-        description = "";
         date = "";
         heuredebut = "";
         heurefin = "";
@@ -58,7 +54,7 @@ public class Properties {
 
     @Override
     public String toString() {
-        return "Properties{" + "name=" + name + ", description=" + description + ", date=" + date + ", heuredebut=" + heuredebut + ", heurefin=" + heurefin + ", lieu=" + lieu + ", camion=" + camion + ", truckid=" + truckid + '}';
+        return "Properties{" + " date=" + date + ", heuredebut=" + heuredebut + ", heurefin=" + heurefin + ", lieu=" + lieu + ", camion=" + camion + ", truckid=" + truckid + '}';
     }
 
 }

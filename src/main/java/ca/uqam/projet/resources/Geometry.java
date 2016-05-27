@@ -7,21 +7,11 @@ package ca.uqam.projet.resources;
 
 public class Geometry {
 
-    private String type;
     private float coordinates[];
 
     public Geometry() {
         coordinates = new float[2];
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public float[] getCoordinates() {
         return coordinates;
     }
@@ -32,7 +22,7 @@ public class Geometry {
 
     @Override
     public String toString() {
-        return "Geometry{" + "type=" + type + ", X=" + coordinates[0] + ", Y=" + coordinates[1] + '}';
+        return "Geometry{" + " X=" + coordinates[0] + ", Y=" + coordinates[1] + '}';
     }
 
 }
