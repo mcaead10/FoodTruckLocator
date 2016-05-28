@@ -45,7 +45,7 @@ public class FoodTruckList {
             + "on conflict do nothing";
 
     private static final String INSERT_POINT_DE_VENTE
-            = "INSERT INTO pointdevente(truckid, lieu, longiture, latitude, jour, heure_debut, heure fin)"
+            = "INSERT INTO pointdevente(truckid, lieu, longitude, latitude, jour, heure_debut, heure_fin)"
             + "VALUES (?,?,?,?,?,?,?)"
             + "on conflict do nothing";
 
@@ -53,10 +53,10 @@ public class FoodTruckList {
         Connection conn = connect();
         for (FoodTruck foodTruck : foodTruckList) {
             insertFoodTruck(foodTruck, conn);
-            //   insertPointDeVente(foodTruck);
+            insertPointDeVente(foodTruck, conn);
         }
-        System.out.println("done");
-        return;
+        diconnect(conn);
+   
     }
 
     @Override
@@ -72,19 +72,15 @@ public class FoodTruckList {
             ps = conn.prepareStatement(INSERT_FOOD_TRUCK);
             ps.setString(1, foodtruck.getProperties().getCamion());
             ps.setString(2, foodtruck.getProperties().getTruckid());
-//            int line = ps.executeUpdate();
-          ps.execute();
-//            System.out.println("LINE : "+ line);
+            ps.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("ERREURR");
             System.out.println(e.getMessage());
         } finally {
             if (ps != null) {
                 try {
                         ps.close();
                 } catch (SQLException e) {
-                    System.out.println("ERREURR");
                     System.err.println(e.getClass().getName() + ": " + e.getMessage());
                     System.exit(0);
                 }
@@ -92,12 +88,33 @@ public class FoodTruckList {
         }
     }
 
-    private void insertPointDeVente(FoodTruck foodtruck) {
-//        return jdbcTemplate.update(conn -> {
-//            PreparedStatement ps = conn.PreparedStatement(INSERT_POINT_DE_VENTE);
-//            ps.setInt(1, x);
-//
-//        }
+    private void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
+
+        PreparedStatement ps = null;
+        System.out.println("ADD "+ foodtruck);
+        try {
+            ps = conn.prepareStatement(INSERT_POINT_DE_VENTE);
+            ps.setString(1, foodtruck.getProperties().getTruckid());
+            ps.setString(2, foodtruck.getProperties().getLieu());
+            ps.setFloat(3, foodtruck.getGeometry().getCoordinates()[0]);
+            ps.setFloat(4, foodtruck.getGeometry().getCoordinates()[1]);
+            ps.setString(5, foodtruck.getProperties().getDate());
+            ps.setString(6, foodtruck.getProperties().getHeuredebut());
+            ps.setString(7, foodtruck.getProperties().getHeurefin());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                        ps.close();
+                } catch (SQLException e) {
+                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                    System.exit(0);
+                }
+            }
+        }
     }
 
     private Connection connect() {
