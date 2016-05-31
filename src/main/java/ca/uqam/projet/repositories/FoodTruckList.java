@@ -101,7 +101,6 @@ public class FoodTruckList {
         String dateFinStr = date + " " + foodtruck.getProperties().getHeurefin() + " " + TIMEZONE;
 
         PreparedStatement ps = null;
-        System.out.println("ADD " + foodtruck);
         try {
             Date dateDebut = format.parse(dateDebutStr);
             Date dateFin = format.parse(dateFinStr);
