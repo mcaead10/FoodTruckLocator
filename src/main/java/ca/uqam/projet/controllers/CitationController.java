@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.*;
 public class CitationController {
 
   @Autowired CitationRepository repository;
+  @Autowired FoodTruckList foodTruckList;
 
   @RequestMapping("/citations")
   public List<Citation> findAll() {
     return repository.findAll();
+  }
+  
+  @RequestMapping("/horaires-camions")
+  public List<FoodTruck> getFoodTruckList(){
+      System.out.println(foodTruckList.getFoodTruckList());
+    return foodTruckList.getFoodTruckList();
   }
 
   @RequestMapping("/citations/{id}")

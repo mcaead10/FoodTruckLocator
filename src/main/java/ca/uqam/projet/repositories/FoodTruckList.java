@@ -72,7 +72,6 @@ public class FoodTruckList {
     private void insertFoodTruck(FoodTruck foodtruck, Connection conn) {
 
         PreparedStatement ps = null;
-        System.out.println("ADD " + foodtruck);
         try {
             ps = conn.prepareStatement(INSERT_FOOD_TRUCK);
             ps.setString(1, foodtruck.getProperties().getCamion());
