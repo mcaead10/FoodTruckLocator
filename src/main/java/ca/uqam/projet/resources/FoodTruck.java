@@ -1,6 +1,7 @@
 package ca.uqam.projet.resources;
 
 import com.fasterxml.jackson.annotation.*;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
@@ -12,9 +13,9 @@ private Properties properties;
   public FoodTruck() {
   }
   
-  public FoodTruck(String truckid, String camion) {
-      geometry = null;
-      properties = new Properties(truckid, camion);
+  public FoodTruck(String truckid, String camion, String lieu, float x, float y, Date heureDebut, Date heureFin  ) {
+      geometry = new Geometry(x, y);
+      properties = new Properties(lieu, camion, truckid, heureDebut, heureFin);
   }
 
 
@@ -22,16 +23,8 @@ private Properties properties;
         return properties;
     }
 
-    public void setProperties(Properties properties) {
-        this.properties = properties;
-    }
-
     public Geometry getGeometry() {
         return geometry;
-    }
-
-    public void setValue(Geometry geometry) {
-        this.geometry = geometry;
     }
 
     @Override

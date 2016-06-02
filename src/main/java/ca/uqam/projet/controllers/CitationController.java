@@ -23,7 +23,7 @@ public class CitationController {
   @RequestMapping("/horaires-camions")
   public List<FoodTruck> getFoodTruckList(){
       System.out.println(foodTruckList.getFoodTruckList());
-    return foodTruckList.getFoodTruckList();
+    return foodTruckList.selectFoodTruckList();
   }
 
   @RequestMapping("/citations/{id}")

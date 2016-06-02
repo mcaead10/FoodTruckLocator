@@ -12,6 +12,10 @@ public class Geometry {
     public Geometry() {
         coordinates = new float[2];
     }
+
+    public Geometry(float x, float y) {
+        this.coordinates = new  float[] {x,y};
+    }
     public float[] getCoordinates() {
         return coordinates;
     }

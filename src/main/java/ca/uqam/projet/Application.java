@@ -1,5 +1,6 @@
 package ca.uqam.projet;
 
+import ca.uqam.projet.repositories.BDFoodTruck;
 import ca.uqam.projet.repositories.FoodTruckList;
 import ca.uqam.projet.resources.FoodTruck;
 import java.text.SimpleDateFormat;
@@ -26,13 +27,14 @@ public class Application {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Scheduled(cron = "0 29 0,20,12 * * ?")
+    @Scheduled(cron = "0 0 0,12 * * ?")
     public void GetFoodTruckList() {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();
         FoodTruckList foodTruckList = restTemplate.getForObject("http://camionderue.com/donneesouvertes/geojson", FoodTruckList.class);
         //  System.out.println(foodTruckList);
-        foodTruckList.insertAll();
+        BDFoodTruck bdFoodTruck = new BDFoodTruck();
+        bdFoodTruck.insertAll(foodTruckList);
         // System.out.println(foodTruckList);
 //        jdbcTemplate.execute("DROP TABLE foodtrucks IF EXISTS");
 //        jdbcTemplate.execute("CREATE TABLE foodtrucks("
