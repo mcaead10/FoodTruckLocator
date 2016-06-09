@@ -88,7 +88,7 @@ public class BDFoodTruck {
     }
 
     private void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
-
+        ////////est ce qu'il faut garder l'historique ou on peut delete la table a chaque ajout dans la bd?
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
         String date = foodtruck.getProperties().getDate();
         String dateDebutStr = date + " " + foodtruck.getProperties().getHeuredebut() + " " + TIMEZONE;
@@ -98,16 +98,16 @@ public class BDFoodTruck {
         try {
             Date dateDebut = format.parse(dateDebutStr);
             Date dateFin = format.parse(dateFinStr);
-            java.sql.Date sqlDatedebut = new java.sql.Date(dateDebut.getTime());
-            java.sql.Date sqlDateFin = new java.sql.Date(dateFin.getTime());
+            java.sql.Timestamp sqlDatedebut = new java.sql.Timestamp(dateDebut.getTime());
+            java.sql.Timestamp sqlDateFin = new java.sql.Timestamp(dateFin.getTime());
 
             ps = conn.prepareStatement(INSERT_POINT_DE_VENTE);
             ps.setString(1, foodtruck.getProperties().getTruckid());
             ps.setString(2, foodtruck.getProperties().getLieu());
             ps.setFloat(3, foodtruck.getGeometry().getCoordinates()[0]);
             ps.setFloat(4, foodtruck.getGeometry().getCoordinates()[1]);
-            ps.setDate(5, sqlDatedebut);
-            ps.setDate(6, sqlDateFin);
+            ps.setTimestamp(5, sqlDatedebut);
+            ps.setTimestamp(6, sqlDateFin);
             ps.executeUpdate();
 
         } catch (SQLException | ParseException e) {
