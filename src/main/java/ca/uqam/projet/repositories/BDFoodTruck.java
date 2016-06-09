@@ -55,14 +55,7 @@ public class BDFoodTruck {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                    System.exit(0);
-                }
-            }
+            CloseConnection(ps);
         }
         System.out.println(list);
         return list;
@@ -90,14 +83,7 @@ public class BDFoodTruck {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                    System.exit(0);
-                }
-            }
+            CloseConnection(ps);
         }
     }
 
@@ -127,13 +113,17 @@ public class BDFoodTruck {
         } catch (SQLException | ParseException e) {
             System.out.println(e.getMessage());
         } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                    System.exit(0);
-                }
+            CloseConnection(ps);
+        }
+    }
+
+    private void CloseConnection(PreparedStatement ps) {
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
             }
         }
     }
