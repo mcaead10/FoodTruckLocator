@@ -16,3 +16,5 @@ CREATE TABLE POINTDEVENTE
   PRIMARY KEY (truckid, heure_debut, lieu),
   FOREIGN KEY (truckid) REFERENCES FOODTRUCK (truckid) ON DELETE CASCADE
 );
+
+-- select Distinct foodtruck.camion, pointdevente.lieu from foodtruck, pointdevente where pointdevente.lieu like 'Maisonneuve Rosemont';
