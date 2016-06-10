@@ -7,11 +7,7 @@ package ca.uqam.projet.resources;
 
 import ca.uqam.projet.service.ConvertisseurDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Properties {
 
@@ -85,7 +81,7 @@ public class Properties {
 
     @Override
     public String toString() {
-        return "Properties{" + ", camion=" + camion + ", truckid=" + truckid + "lieu=" + lieu + ", heureDebutDate=" + heureDebutDate + ", heureFinDate=" + heureFinDate + '}';
+        return "Properties{" + "lieu=" + lieu + ", camion=" + camion + ", truckid=" + truckid + ", heureDebutDate=" + heureDebutDate + ", heureFinDate=" + heureFinDate + '}';
     }
 
 }

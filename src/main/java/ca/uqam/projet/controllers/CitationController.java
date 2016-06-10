@@ -22,7 +22,7 @@ public class CitationController {
   
   @RequestMapping("/horaires-camions")
   public List<FoodTruck> getFoodTruckList(){
-      System.out.println(foodTruckList.getFoodTruckList());
+    //  System.out.println(foodTruckList.getFoodTruckList());
     return foodTruckList.selectFoodTruckList();
   }
 

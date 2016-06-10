@@ -8,23 +8,15 @@ package ca.uqam.projet.repositories;
 import ca.uqam.projet.resources.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.dao.*;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public class FoodTruckList {
 
-    private @JsonProperty("features")
+    private final @JsonProperty("features")
     List<FoodTruck> foodTruckList;
 
     public FoodTruckList() {
@@ -36,8 +28,7 @@ public class FoodTruckList {
     }
     
      public List<FoodTruck> selectFoodTruckList() {
-        BDFoodTruck bDFoodTruck = new BDFoodTruck();
-        return new BDFoodTruck().select();
+        return BDFoodTruck.select();
     }
 
     public void addFoodTruck(FoodTruck foodTruck) {

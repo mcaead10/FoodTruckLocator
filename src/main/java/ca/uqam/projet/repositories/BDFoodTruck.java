@@ -13,9 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class BDFoodTruck {
 
-    public BDFoodTruck() {
-
-    }
     private static final String INSERT_FOOD_TRUCK
             = "INSERT INTO foodtruck(camion, truckid)"
             + "VALUES (?,?)"
@@ -31,7 +28,7 @@ public class BDFoodTruck {
 
     private static final String TIMEZONE = "EDT 2016";
 
-    public List<FoodTruck> select() {
+    public static List<FoodTruck> select() {
 
         List<FoodTruck> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -57,7 +54,7 @@ public class BDFoodTruck {
         return list;
     }
 
-    public void insertAll(FoodTruckList foodTruckList) {
+    public static void insertAll(FoodTruckList foodTruckList) {
         Connection conn = connect();
         for (FoodTruck foodTruck : foodTruckList.getFoodTruckList()) {
             insertFoodTruck(foodTruck, conn);
@@ -67,7 +64,7 @@ public class BDFoodTruck {
 
     }
 
-    private void insertFoodTruck(FoodTruck foodtruck, Connection conn) {
+    private static void insertFoodTruck(FoodTruck foodtruck, Connection conn) {
 
         PreparedStatement ps = null;
         try {
@@ -83,7 +80,7 @@ public class BDFoodTruck {
         }
     }
 
-    private void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
+    private static void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
         ////////est ce qu'il faut garder l'historique ou on peut delete la table a chaque ajout dans la bd?
 
         PreparedStatement ps = null;
@@ -105,7 +102,7 @@ public class BDFoodTruck {
         }
     }
 
-    private void CloseConnection(PreparedStatement ps) {
+    private static void CloseConnection(PreparedStatement ps) {
         if (ps != null) {
             try {
                 ps.close();
@@ -116,7 +113,7 @@ public class BDFoodTruck {
         }
     }
 
-    private Connection connect() {
+    private static Connection connect() {
         Connection conn = null;
         try {
             conn = DriverManager
@@ -131,7 +128,7 @@ public class BDFoodTruck {
         return conn;
     }
 
-    private void diconnect(Connection conn) {
+    private static void diconnect(Connection conn) {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
