@@ -5,21 +5,33 @@
  */
 package ca.uqam.projet.resources;
 
+import ca.uqam.projet.service.ConvertisseurDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Properties {
 
-    private @JsonProperty("Date") String date;
-    private @JsonProperty("Heure_debut") String heuredebut;
-    private @JsonProperty("Heure_fin") String heurefin;
-    private @JsonProperty("Lieu") String lieu;
-    private @JsonProperty("Camion") String camion;
-    private @JsonProperty("Truckid") String truckid;
+    private @JsonProperty("Date")
+    String date;
+    private @JsonProperty("Heure_debut")
+    String heuredebut;
+    private @JsonProperty("Heure_fin")
+    String heurefin;
+    private @JsonProperty("Lieu")
+    String lieu;
+    private @JsonProperty("Camion")
+    String camion;
+    private @JsonProperty("Truckid")
+    String truckid;
     private Date heureDebutDate;
     private Date heureFinDate;
-    
+
+    private static final String TIMEZONE = "EDT 2016";
+
     public Properties() {
     }
 
@@ -29,24 +41,34 @@ public class Properties {
         this.truckid = truckid;
         this.heureDebutDate = heureDebutDate;
         this.heureFinDate = heureFinDate;
-        
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
-        String heureDebut = format.format(heureDebutDate);
-       // System.out.println("HEURE_DEBUT =  "+heureDebut);
+        this.heuredebut = troncHeure(ConvertisseurDate.dateString(heureDebutDate));
+        this.heurefin = troncHeure(ConvertisseurDate.dateString(heureFinDate));
+        this.date = troncDate(ConvertisseurDate.dateString(heureFinDate));
     }
 
+    private String dateHeure(String heure) {
+        return date + " " + heure + " " + TIMEZONE;
+    }
 
-
-    public String getDate() {
+    private String troncHeure(String date) {
+        return date;
+    }
+    private String troncDate(String date) {
         return date;
     }
 
-    public String getHeuredebut() {
-        return heuredebut;
+    public Date getHeureDebutDate() {
+        if (heureDebutDate != null) {
+            return heureDebutDate;
+        }
+        return ConvertisseurDate.stringDate(dateHeure(heuredebut));
     }
 
-    public String getHeurefin() {
-        return heurefin;
+    public Date getHeureFinDate() {
+        if (heureFinDate != null) {
+            return heureFinDate;
+        }
+        return ConvertisseurDate.stringDate(dateHeure(heurefin));
     }
 
     public String getLieu() {
@@ -65,9 +87,5 @@ public class Properties {
     public String toString() {
         return "Properties{" + ", camion=" + camion + ", truckid=" + truckid + "lieu=" + lieu + ", heureDebutDate=" + heureDebutDate + ", heureFinDate=" + heureFinDate + '}';
     }
-
-
-
-
 
 }

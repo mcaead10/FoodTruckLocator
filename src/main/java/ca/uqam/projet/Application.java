@@ -27,7 +27,8 @@ public class Application {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Scheduled(cron = "*/10 * * * * ?")
+  //  @Scheduled(cron = "*/10 * * * * ?") 10 seconde
+    @Scheduled(cron = "0 0 0,12 * * ?")
     public void GetFoodTruckList() {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); //Test
         RestTemplate restTemplate = new RestTemplate();

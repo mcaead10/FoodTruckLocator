@@ -6,10 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +20,7 @@ public class BDFoodTruck {
             = "INSERT INTO foodtruck(camion, truckid)"
             + "VALUES (?,?)"
             + "on conflict do nothing";
-    
+
     private static final String SELECT_DATE
             = "SELECT * FROM foodtruck NATURAL JOIN pointdevente;";
 
@@ -35,7 +32,7 @@ public class BDFoodTruck {
     private static final String TIMEZONE = "EDT 2016";
 
     public List<FoodTruck> select() {
-        
+
         List<FoodTruck> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection conn = connect();
@@ -43,15 +40,14 @@ public class BDFoodTruck {
             ps = conn.prepareStatement(SELECT_DATE);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new FoodTruck(rs.getString("truckid"), 
-                                       rs.getString("camion"), 
-                                       rs.getString("lieu"),
-                                       rs.getInt("longitude"),
-                                       rs.getInt("latitude"),
-                                       rs.getDate("heure_debut"),
-                                       rs.getDate("heure_fin")));
+                list.add(new FoodTruck(rs.getString("truckid"),
+                        rs.getString("camion"),
+                        rs.getString("lieu"),
+                        rs.getInt("longitude"),
+                        rs.getInt("latitude"),
+                        rs.getTimestamp("heure_debut"),
+                        rs.getTimestamp("heure_fin")));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -89,28 +85,20 @@ public class BDFoodTruck {
 
     private void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
         ////////est ce qu'il faut garder l'historique ou on peut delete la table a chaque ajout dans la bd?
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
-        String date = foodtruck.getProperties().getDate();
-        String dateDebutStr = date + " " + foodtruck.getProperties().getHeuredebut() + " " + TIMEZONE;
-        String dateFinStr = date + " " + foodtruck.getProperties().getHeurefin() + " " + TIMEZONE;
 
         PreparedStatement ps = null;
         try {
-            Date dateDebut = format.parse(dateDebutStr);
-            Date dateFin = format.parse(dateFinStr);
-            java.sql.Timestamp sqlDatedebut = new java.sql.Timestamp(dateDebut.getTime());
-            java.sql.Timestamp sqlDateFin = new java.sql.Timestamp(dateFin.getTime());
-
             ps = conn.prepareStatement(INSERT_POINT_DE_VENTE);
             ps.setString(1, foodtruck.getProperties().getTruckid());
             ps.setString(2, foodtruck.getProperties().getLieu());
             ps.setFloat(3, foodtruck.getGeometry().getCoordinates()[0]);
             ps.setFloat(4, foodtruck.getGeometry().getCoordinates()[1]);
-            ps.setTimestamp(5, sqlDatedebut);
-            ps.setTimestamp(6, sqlDateFin);
+            ps.setTimestamp(5, new java.sql.Timestamp(foodtruck.getProperties().getHeureDebutDate().getTime()));
+            ps.setTimestamp(6, new java.sql.Timestamp(foodtruck.getProperties().getHeureFinDate().getTime()));
+
             ps.executeUpdate();
 
-        } catch (SQLException | ParseException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             CloseConnection(ps);
