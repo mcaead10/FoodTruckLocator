@@ -47,10 +47,13 @@ public class Properties {
     }
 
     private String troncHeure(String date) {
-        return date;
+        String[] parts = date.split(" ");
+        return parts[1];
     }
+
     private String troncDate(String date) {
-        return date;
+        String[] parts = date.split(" ");
+        return parts[0];
     }
 
     public Date getHeureDebutDate() {
