@@ -37,9 +37,9 @@ public class Properties {
         this.truckid = truckid;
         this.heureDebutDate = heureDebutDate;
         this.heureFinDate = heureFinDate;
-        this.heuredebut = troncHeure(ConvertisseurDate.dateString(heureDebutDate));
-        this.heurefin = troncHeure(ConvertisseurDate.dateString(heureFinDate));
-        this.date = troncDate(ConvertisseurDate.dateString(heureFinDate));
+        this.heuredebut = troncHeure(ConvertisseurDate.TimestampString(heureDebutDate));
+        this.heurefin = troncHeure(ConvertisseurDate.TimestampString(heureFinDate));
+        this.date = troncDate(ConvertisseurDate.TimestampString(heureFinDate));
     }
 
     private String dateHeure(String heure) {
@@ -60,14 +60,14 @@ public class Properties {
         if (heureDebutDate != null) {
             return heureDebutDate;
         }
-        return ConvertisseurDate.stringDate(dateHeure(heuredebut));
+        return ConvertisseurDate.stringTimestamp(dateHeure(heuredebut));
     }
 
     public Date getHeureFinDate() {
         if (heureFinDate != null) {
             return heureFinDate;
         }
-        return ConvertisseurDate.stringDate(dateHeure(heurefin));
+        return ConvertisseurDate.stringTimestamp(dateHeure(heurefin));
     }
 
     public String getLieu() {

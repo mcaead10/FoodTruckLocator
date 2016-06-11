@@ -1,6 +1,7 @@
 package ca.uqam.projet.repositories;
 
 import ca.uqam.projet.resources.FoodTruck;
+import ca.uqam.projet.service.ConvertisseurDate;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class BDFoodTruck {
             + "on conflict do nothing";
 
     private static final String SELECT_DATE
-            = "SELECT * FROM foodtruck NATURAL JOIN pointdevente;";
+            = "SELECT * FROM foodtruck NATURAL JOIN pointdevente WHERE heure_debut >= ? AND heure_fin <= ? ;";
 
     private static final String INSERT_POINT_DE_VENTE
             = "INSERT INTO pointdevente(truckid, lieu, longitude, latitude, heure_debut, heure_fin)"
@@ -28,13 +29,15 @@ public class BDFoodTruck {
 
     private static final String TIMEZONE = "EDT 2016";
 
-    public static List<FoodTruck> select() {
+    public static List<FoodTruck> select(String dateDebut, String dateFin) {
 
         List<FoodTruck> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection conn = connect();
         try {
             ps = conn.prepareStatement(SELECT_DATE);
+            ps.setTimestamp(1, new java.sql.Timestamp(ConvertisseurDate.stringDate(dateDebut).getTime()));
+            ps.setTimestamp(2, new java.sql.Timestamp(ConvertisseurDate.stringDate(dateFin).getTime()));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new FoodTruck(rs.getString("truckid"),
@@ -50,6 +53,7 @@ public class BDFoodTruck {
         } finally {
             CloseConnection(ps);
         }
+        diconnect(conn);
         System.out.println(list);
         return list;
     }

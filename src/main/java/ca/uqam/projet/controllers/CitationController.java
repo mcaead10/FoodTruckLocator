@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class CitationController {
 
-  @Autowired CitationRepository repository;
-  @Autowired FoodTruckList foodTruckList;
+    @Autowired
+    CitationRepository repository;
+    @Autowired
+    FoodTruckList foodTruckList;
 
-  @RequestMapping("/citations")
-  public List<Citation> findAll() {
-    return repository.findAll();
-  }
-  
-  @RequestMapping("/horaires-camions")
-  public List<FoodTruck> getFoodTruckList(){
-    //  System.out.println(foodTruckList.getFoodTruckList());
-    return foodTruckList.selectFoodTruckList();
-  }
+    @RequestMapping("/citations")
+    public List<Citation> findAll() {
+        return repository.findAll();
+    }
 
-  @RequestMapping("/citations/{id}")
-  public Citation findById(@PathVariable("id") int id) {
-    return repository.findById(id);
-  }
+    @RequestMapping(value = "/horaires-camions", method = RequestMethod.GET)
+    public List<FoodTruck> getFoodTruckList(String du, String au) {
+        return foodTruckList.selectFoodTruckList(du , au);
+    }
+
+    @RequestMapping("/citations/{id}")
+    public Citation findById(@PathVariable("id") int id) {
+        return repository.findById(id);
+    }
 }
