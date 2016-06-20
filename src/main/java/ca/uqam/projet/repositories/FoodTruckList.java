@@ -26,10 +26,6 @@ public class FoodTruckList {
     public List<FoodTruck> getFoodTruckList() {
         return foodTruckList;
     }
-    
-     public List<FoodTruck> selectFoodTruckList(String dateDebut, String dateFin) {
-        return BDFoodTruck.select(dateDebut, dateFin);
-    }
 
     public void addFoodTruck(FoodTruck foodTruck) {
         this.foodTruckList.add(foodTruck);

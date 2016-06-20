@@ -1,5 +1,6 @@
 package ca.uqam.projet.controllers;
 
+import ca.uqam.projet.service.BDFoodTruck;
 import java.util.*;
 
 import ca.uqam.projet.repositories.*;
@@ -24,7 +25,7 @@ public class CitationController {
 
     @RequestMapping(value = "/horaires-camions", method = RequestMethod.GET)
     public List<FoodTruck> getFoodTruckList(String du, String au) {
-        return foodTruckList.selectFoodTruckList(du , au);
+        return BDFoodTruck.select(du, au);
     }
 
     @RequestMapping("/citations/{id}")

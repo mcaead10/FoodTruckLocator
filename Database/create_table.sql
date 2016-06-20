@@ -1,3 +1,15 @@
+CREATE TABLE BIXI
+(
+  id        		    INTEGER      NOT NULL,
+  name       	        VARCHAR(255) NOT NULL,
+  longitude 		    FLOAT        NOT NULL,
+  latitude  		    FLOAT        NOT NULL,
+  ouvert    		    BOOLEAN      NOT NULL,
+  veloDisponible        INTEGER      NOT NULL,
+  emplacementDisponible INTEGER      NOT NULL,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE FOODTRUCK
 (
   camion  VARCHAR(255) NOT NULL,
@@ -5,12 +17,13 @@ CREATE TABLE FOODTRUCK
   PRIMARY KEY (truckid)
 );
 
+
 CREATE TABLE POINTDEVENTE
 (
   truckid     VARCHAR(255) NOT NULL,
   lieu        VARCHAR(255) NOT NULL,
-  longitude   VARCHAR(255) NOT NULL,
-  latitude    VARCHAR(255) NOT NULL,
+  longitude   FLOAT        NOT NULL,
+  latitude    FLOAT        NOT NULL,
   heure_debut TIMESTAMPTZ  NOT NULL,
   heure_fin   TIMESTAMPTZ  NOT NULL,
   PRIMARY KEY (truckid, heure_debut, lieu),

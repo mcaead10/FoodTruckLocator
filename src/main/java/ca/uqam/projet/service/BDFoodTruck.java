@@ -1,9 +1,8 @@
-package ca.uqam.projet.repositories;
+package ca.uqam.projet.service;
 
+import ca.uqam.projet.repositories.FoodTruckList;
 import ca.uqam.projet.resources.FoodTruck;
-import ca.uqam.projet.service.ConvertisseurDate;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BDFoodTruck {
+public class BDFoodTruck extends BD{
 
     private static final String INSERT_FOOD_TRUCK
             = "INSERT INTO foodtruck(camion, truckid)"
@@ -86,6 +85,7 @@ public class BDFoodTruck {
 
     private static void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
         ////////est ce qu'il faut garder l'historique ou on peut delete la table a chaque ajout dans la bd?
+        //Solution..... on conflict do update??
 
         PreparedStatement ps = null;
         try {
@@ -96,52 +96,12 @@ public class BDFoodTruck {
             ps.setFloat(4, foodtruck.getGeometry().getCoordinates()[1]);
             ps.setTimestamp(5, new java.sql.Timestamp(foodtruck.getProperties().getHeureDebutDate().getTime()));
             ps.setTimestamp(6, new java.sql.Timestamp(foodtruck.getProperties().getHeureFinDate().getTime()));
-
             ps.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             CloseConnection(ps);
-        }
-    }
-
-    private static void CloseConnection(PreparedStatement ps) {
-        if (ps != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
-            }
-        }
-    }
-
-    private static Connection connect() {
-        Connection conn = null;
-        try {
-            conn = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/projet",
-                            "postgres", "collin");
-            conn.setAutoCommit(true);
-            System.out.println("Opened database successfully");
-        } catch (SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return conn;
-    }
-
-    private static void diconnect(Connection conn) {
-        try {
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
-                conn = null;
-                System.out.println("Closed database successfully");
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
     }
 }
