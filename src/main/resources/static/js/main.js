@@ -1,12 +1,13 @@
-var start = document.getElementById("startDate").value;
-var end = document.getElementById("endDate").value;
+var start = document.getElementById("startDate");
+var end = document.getElementById("endDate");
 var btn = document.getElementById("btn-valid");
 btn.addEventListener("click", function (e) {
     e.preventDefault();
+    start = start.value;
+    end = end.value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (!start || !end)
-        {
+        if (!start || !end) {
             alert("Format de date incorect");
         } else {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
