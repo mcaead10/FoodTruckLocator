@@ -1,5 +1,15 @@
-legend {
-    display: inline-block;
-    margin-right: 10px;
-    color: orange
+h1 { margin-right: 10px; color: orange; }
+
+#global{
+    width:100%;
 }
+#droite, #gauche {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#global #gauche {
+    float:left;
+}
+
+#mapid { height: 500px; }

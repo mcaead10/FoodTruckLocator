@@ -3,23 +3,29 @@
 <html>
 <head>
     <title>FoodTruck Locator</title>
-    <!--<link rel="stylesheet" type="text/css" href="css/mystyle.css">-->
-    <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />-->
-
+    <style type="text/css"></style>
+    <link rel="stylesheet" href="css/mystyle.css"/>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
 </head>
 <body>
 <h1>FoodTruck</h1>
 <form>
     <h2>Recherche</h2>
-    <legend id="DateDebut" for="startDate">Date debut :</legend>
-    <input type="date" id="startDate"/>
-    <legend id="DateFin" for="DateFin">Date fin :</legend>
-    <input type="date" id="endDate"/>
-    <button id="btn-valid">Rechercher</button>
+    <div id="global">
+        <div id="gauche">
+            <legend id="DateDebut" for="startDate">Date debut :</legend>
+            <input type="date" id="startDate"/>
+        </div>
+        <div id="droite">
+            <legend id="DateFin" for="DateFin">Date fin :</legend>
+            <input type="date" id="endDate"/>
+            <button id="btn-valid">Rechercher</button>
+        </div>
+    </div>
 </form>
-<div id="mapid"></div>
-    <br/>
-<script src="js/main.js"></script>
+<div id='mapid' class='map'></div>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="js/leaflet.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
