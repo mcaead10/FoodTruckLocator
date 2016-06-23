@@ -36,6 +36,12 @@
       <artifactId>leaflet</artifactId>
       <version>0.7.7</version>
     </dependency>
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>3.8</version>
+      <type>jar</type>
+    </dependency>
   </dependencies>
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
