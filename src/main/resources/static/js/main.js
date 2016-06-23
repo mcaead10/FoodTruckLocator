@@ -13,7 +13,7 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var json = JSON.parse(xhttp.responseText);
             console.log("Voici le nomber de camion: " + json.length);
-        }
+            }
 
     };
     xhttp.open("GET", "/horaires-camions?du=" + start + "&au=" + end, true);
