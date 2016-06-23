@@ -37,7 +37,7 @@ public class Application {
     }
 
     //  @Scheduled(cron = "*/10 * * * * ?") 10 seconde
-    @Scheduled(cron = "*/10 * * * * ?")
+    @Scheduled(cron = "0 */10 * * * ?")
     public void GetBixiList() {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();

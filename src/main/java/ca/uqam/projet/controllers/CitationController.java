@@ -25,6 +25,7 @@ public class CitationController {
 
     @RequestMapping(value = "/horaires-camions", method = RequestMethod.GET)
     public List<FoodTruck> getFoodTruckList(String du, String au) {
+        System.out.println("DEbut: " + du + "fin: " + au);
         return BDFoodTruck.select(du, au);
     }
 
