@@ -10,6 +10,13 @@ CREATE TABLE BIXI
   PRIMARY KEY (id)
 );
 
+CREATE TABLE ANCRAGEVELO
+(
+  longitude FLOAT        NOT NULL,
+  latitude  FLOAT        NOT NULL,
+  PRIMARY KEY (longitude, latitude)
+);
+
 CREATE TABLE FOODTRUCK
 (
   camion  VARCHAR(255) NOT NULL,

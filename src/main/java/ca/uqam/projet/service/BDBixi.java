@@ -2,7 +2,6 @@ package ca.uqam.projet.service;
 
 import ca.uqam.projet.repositories.BixiList;
 import ca.uqam.projet.resources.Bixi;
-import static ca.uqam.projet.service.BD.connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
