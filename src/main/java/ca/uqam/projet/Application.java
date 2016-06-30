@@ -35,7 +35,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    //  @Scheduled(cron = "*/10 * * * * ?") 10 seconde
+    //@Scheduled(cron = "*/10 * * * * ?")// 10 seconde
     @Scheduled(cron = "0 0 0,12 * * ?")
     public void getFoodTruckList() {
         final String URL = "http://camionderue.com/donneesouvertes/geojson";
@@ -44,7 +44,7 @@ public class Application {
         BDFoodTruck.insertAll(foodTruckList);
     }
 
-    //  @Scheduled(cron = "*/10 * * * * ?") 10 seconde
+    //@Scheduled(cron = "*/10 * * * * ?")// 10 seconde
     @Scheduled(cron = "0 */10 * * * ?")
     public void getBixiList() {
 
@@ -67,6 +67,7 @@ public class Application {
         }
     }
 
+    //@Scheduled(cron = "*/10 * * * * ?")// 10 seconde
     @Scheduled(cron = "0 0 0 1 * ?")
     public void getAcrageVeloList() throws IOException {
         final String URL = "http://donnees.ville.montreal.qc.ca/dataset/c4dfdeb1-cdb7-44f4-8068-247755a56cc6/resource/78dd2f91-2e68-4b8b-bb4a-44c1ab5b79b6/download/supportvelosigs.csv";
