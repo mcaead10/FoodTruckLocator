@@ -1,9 +1,10 @@
+CREATE EXTENSION postgis;
+
 CREATE TABLE BIXI
 (
   id        		    INTEGER      NOT NULL,
   name       	        VARCHAR(255) NOT NULL,
-  longitude 		    FLOAT        NOT NULL,
-  latitude  		    FLOAT        NOT NULL,
+  geog              GEOGRAPHY(Point) NOT NULL,
   ouvert    		    BOOLEAN      NOT NULL,
   veloDisponible        INTEGER      NOT NULL,
   emplacementDisponible INTEGER      NOT NULL,
@@ -12,9 +13,8 @@ CREATE TABLE BIXI
 
 CREATE TABLE ANCRAGEVELO
 (
-  longitude FLOAT        NOT NULL,
-  latitude  FLOAT        NOT NULL,
-  PRIMARY KEY (longitude, latitude)
+   geog GEOGRAPHY(Point) NOT NULL,
+  PRIMARY KEY (geog)
 );
 
 CREATE TABLE FOODTRUCK

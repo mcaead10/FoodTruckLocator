@@ -6,8 +6,8 @@ public class Bixi {
 
     private final int id;
     private final String name;
-    private final float x;
-    private final float y;
+    private final float longitude;
+    private final float latitude;
     private final boolean ouvert;
     private final int veloDisponible;
     private final int emplacementDisponible;
@@ -17,8 +17,8 @@ public class Bixi {
         this.id = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
         this.ouvert = !Boolean.parseBoolean(element.getElementsByTagName("locked").item(0).getTextContent())
                 && Boolean.parseBoolean(element.getElementsByTagName("installed").item(0).getTextContent());
-        this.x = Float.parseFloat(element.getElementsByTagName("long").item(0).getTextContent());
-        this.y = Float.parseFloat(element.getElementsByTagName("lat").item(0).getTextContent());
+        this.longitude = Float.parseFloat(element.getElementsByTagName("long").item(0).getTextContent());
+        this.latitude = Float.parseFloat(element.getElementsByTagName("lat").item(0).getTextContent());
         this.veloDisponible = Integer.parseInt(element.getElementsByTagName("nbBikes").item(0).getTextContent());
         this.emplacementDisponible = Integer.parseInt(element.getElementsByTagName("nbEmptyDocks").item(0).getTextContent());
     }
@@ -31,12 +31,12 @@ public class Bixi {
         return name;
     }
 
-    public float getX() {
-        return x;
+    public float getLongitude() {
+        return longitude;
     }
 
-    public float getY() {
-        return y;
+    public float getLatitude() {
+        return latitude;
     }
 
     public boolean isOuvert() {
