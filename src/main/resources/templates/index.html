@@ -8,22 +8,29 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
 </head>
 <body>
-<h1>FoodTruck</h1>
-<form>
+<div id="header">
+    <h1 align="center">FoodTruck and Bixi Locator</h1>
     <h2>Recherche</h2>
+</div>
+<form>
     <div id="global">
-        <div id="gauche">
-            <legend for="startDate">Date debut :</legend>
-            <input type="date" id="startDate"/>
-        </div>
-        <div id="droite">
-            <legend for="endDate">Date fin :</legend>
-            <input type="date" id="endDate"/>
+        <div id="gaucheGlobal">
+            <div id="gauche">
+                <legend id="lsd" for="startDate">Date debut :</legend>
+                <legend id="led" for="endDate">Date fin :</legend>
+            </div>
+
+            <div id="droite">
+                <input type="date" id="startDate"/>
+                <input type="date" id="endDate"/>
+            </div>
             <button id="btn-valid">Rechercher</button>
+        </div>
+        <div id="droiteGlobal">
+            <div id='mapid' class='map'></div>
         </div>
     </div>
 </form>
-<div id='mapid' class='map'></div>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 <script src="js/main.js"></script>
 </body>

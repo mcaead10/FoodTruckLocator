@@ -3,13 +3,35 @@ h1 { margin-right: 10px; color: orange; }
 #global{
     width:100%;
 }
-#droite, #gauche {
+#gauche{
     display: inline-block;
+}
+
+#droite, #gauche {
     vertical-align: top;
 }
 
-#global #gauche {
+#global #gauche, #gaucheGlobal{
     float:left;
 }
 
-#mapid { height: 500px; }
+#gaucheGlobal{
+    width:20vw;
+    background-color:red;
+}
+
+#mapid{
+    height: 80vh;
+    width: 75vw;
+}
+
+#btn-valid{
+    width: 20vw;
+}
+#startDate, #endDate, #lsd, #led{
+    width: 9vw;
+}
+
+#header{
+    height: 15vh;
+}
