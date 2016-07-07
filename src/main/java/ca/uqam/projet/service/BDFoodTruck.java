@@ -42,8 +42,8 @@ public class BDFoodTruck extends BD{
                 list.add(new FoodTruck(rs.getString("truckid"),
                         rs.getString("camion"),
                         rs.getString("lieu"),
-                        rs.getInt("longitude"),
-                        rs.getInt("latitude"),
+                        rs.getFloat("longitude"),
+                        rs.getFloat("latitude"),
                         rs.getTimestamp("heure_debut"),
                         rs.getTimestamp("heure_fin")));
             }
