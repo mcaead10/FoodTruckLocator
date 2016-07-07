@@ -5,32 +5,29 @@ import java.util.*;
 
 import ca.uqam.projet.repositories.*;
 import ca.uqam.projet.resources.*;
+import ca.uqam.projet.service.BDBixi;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
-public class CitationController {
+public class FoodtruckController {
 
-    @Autowired
-    CitationRepository repository;
     @Autowired
     FoodTruckList foodTruckList;
-
-    @RequestMapping("/citations")
-    public List<Citation> findAll() {
-        return repository.findAll();
-    }
+    @Autowired
+    BixiList bixiList;
 
     @RequestMapping(value = "/horaires-camions", method = RequestMethod.GET)
     public List<FoodTruck> getFoodTruckList(String du, String au) {
-        System.out.println("DEbut: " + du + "fin: " + au);
         return BDFoodTruck.select(du, au);
     }
 
-    @RequestMapping("/citations/{id}")
-    public Citation findById(@PathVariable("id") int id) {
-        return repository.findById(id);
+    @RequestMapping(value = "/bixi", method = RequestMethod.GET)
+    public List<Bixi> getBixiList(float latitude, float longitude) {
+        System.out.println("latitude: " + latitude);
+        System.out.println("longitude: " + longitude);
+        return null;
     }
 }

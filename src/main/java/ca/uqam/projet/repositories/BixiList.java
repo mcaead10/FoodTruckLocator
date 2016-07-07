@@ -4,7 +4,9 @@ package ca.uqam.projet.repositories;
 import ca.uqam.projet.resources.Bixi;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BixiList {
         private final List<Bixi> bixiList;
 
