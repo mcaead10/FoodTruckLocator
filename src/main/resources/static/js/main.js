@@ -11,6 +11,13 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 var markers = new Array();
 
+var foodTruckIcon = L.icon({
+        iconUrl: 'foodtruck.png',
+        iconSize:     [40, 50],
+        iconAnchor:   [20, 25],
+        popupAnchor:  [0, -10]
+});
+
 document.getElementById("btn-valid").addEventListener("click", function (e) {
     e.preventDefault();
     var start = document.getElementById("startDate").value;
@@ -28,7 +35,8 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
             var json = JSON.parse(xhttp.responseText);
             markerDelete();
             for (var iter = 0; iter < json.length; iter++) {
-                var marker = L.marker([json[iter].geometry.coordinates[1], json[iter].geometry.coordinates[0]])
+                var marker = L.marker([json[iter].geometry.coordinates[1], json[iter].geometry.coordinates[0]],
+                        {icon: foodTruckIcon})
                         .on('click', addVelo)
                         .addTo(mymap)
                         .bindPopup('Nom: ' + json[iter].properties.Camion +
@@ -46,7 +54,10 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
 });
 
 function addVelo(e){
-    mymap.setView(e.latlng, 16)
+    mymap.setView(e.latlng, 16);
+    
+  //  xhttp.open("GET", "/horaires-camions?du=" + start + "&au=" + end, true);
+  // xhttp.send();
 }
 
 function markerDelete() {
