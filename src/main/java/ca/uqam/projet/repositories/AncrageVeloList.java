@@ -1,4 +1,3 @@
-
 package ca.uqam.projet.repositories;
 
 import ca.uqam.projet.resources.AncrageVelo;

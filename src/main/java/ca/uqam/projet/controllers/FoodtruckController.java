@@ -3,7 +3,6 @@ package ca.uqam.projet.controllers;
 import ca.uqam.projet.service.BDFoodTruck;
 import java.util.*;
 
-import ca.uqam.projet.repositories.*;
 import ca.uqam.projet.resources.*;
 import ca.uqam.projet.service.BDAncrageVelo;
 import ca.uqam.projet.service.BDBixi;
