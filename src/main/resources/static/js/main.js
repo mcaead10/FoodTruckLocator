@@ -14,14 +14,21 @@ var markersB = new Array();
 var markersAV = new Array();
 
 var foodTruckIcon = L.icon({
-    iconUrl: 'foodtruck.png',
+    iconUrl: 'foodtruckIcon.png',
     iconSize: [40, 50],
     iconAnchor: [20, 25],
     popupAnchor: [0, -10]
 });
 
 var bixiIcon = L.icon({
-    iconUrl: 'bixi.png',
+    iconUrl: 'bixiIcon.png',
+    iconSize: [40, 50],
+    iconAnchor: [20, 25],
+    popupAnchor: [0, -10]
+});
+
+var ancrageIcon = L.icon({
+    iconUrl: 'ancrageIcon.png',
     iconSize: [40, 50],
     iconAnchor: [20, 25],
     popupAnchor: [0, -10]
@@ -52,7 +59,7 @@ document.getElementById("btn-valid").addEventListener("click", function(e) {
                                 '<br> Lieu: ' + json[iter].properties.Lieu +
                                 '<br> Date: ' + json[iter].properties.Date +
                                 '<br> Heure de début: ' + json[iter].properties.Heure_debut +
-                                '<br> Heure de fin: ' + json[iter].properties.Heure_fin)
+                                '<br> Heure de fin: ' + json[iter].properties.Heure_fin);
                 markersFD.push(marker);
             }
         }
@@ -65,13 +72,14 @@ function addVelo(e) {
     markerDeleteVelo();
     mymap.setView(e.latlng, 16);
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-            var json = JSON.parse(xhttp.responseText);
+    var xhttpBixi = new XMLHttpRequest();
+    xhttpBixi.onreadystatechange = function() {
+        if (xhttpBixi.readyState === 4 && xhttpBixi.status === 200) {
+            var json = JSON.parse(xhttpBixi.responseText);
             for (var iter = 0; iter < json.length; iter++) {
                 if (json[iter].ouvert) {
-                    var marker = L.marker([json[iter].latitude, json[iter].longitude])
+                    var marker = L.marker([json[iter].latitude, json[iter].longitude],
+                            {icon: bixiIcon})
                             .addTo(mymap)
                             .bindPopup('Lieu: ' + json[iter].name +
                                     '<br> Emplacements Disponibles: ' + json[iter].emplacementDisponible +
@@ -81,8 +89,24 @@ function addVelo(e) {
             }
         }
     };
-    xhttp.open("GET", "/bixi?longitude=" + e.latlng.lng + "&latitude=" + e.latlng.lat, true);
-    xhttp.send();
+
+    var xhttpAncrage = new XMLHttpRequest();
+    xhttpAncrage.onreadystatechange = function() {
+        if (xhttpAncrage.readyState === 4 && xhttpAncrage.status === 200) {
+            var json = JSON.parse(xhttpAncrage.responseText);
+            for (var iter = 0; iter < json.length; iter++) {
+                var marker = L.marker([json[iter].latitude, json[iter].longitude],
+                        {icon: ancrageIcon})
+                        .addTo(mymap);
+                markersAV.push(marker);
+            }
+        }
+    };
+
+    xhttpBixi.open("GET", "/bixi?longitude=" + e.latlng.lng + "&latitude=" + e.latlng.lat, true);
+    xhttpBixi.send();
+    xhttpAncrage.open("GET", "/ancragevelo?longitude=" + e.latlng.lng + "&latitude=" + e.latlng.lat, true);
+    xhttpAncrage.send();
 }
 
 function markerDeleteAll() {
