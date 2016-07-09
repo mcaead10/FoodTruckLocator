@@ -15,7 +15,9 @@ public class BDBixi extends BD {
     private static final String INSERT_BIXI
             = "INSERT INTO bixi(id, name, geog, ouvert, veloDisponible, emplacementDisponible)"
             + "VALUES (?,?,ST_GeographyFromText('POINT(' || ? || ' ' || ? || ')'),?,?,?)"
-            + "on conflict do nothing";
+            + "ON CONFLICT(id)"
+            + "DO UPDATE SET velodisponible = EXCLUDED.velodisponible, "
+            + "emplacementdisponible = EXCLUDED.emplacementdisponible";
 
     private static final String SELECT_PROCHE
             = "SELECT *,ST_X(geog::geometry) AS longitude, ST_Y(geog::geometry) AS latitude "

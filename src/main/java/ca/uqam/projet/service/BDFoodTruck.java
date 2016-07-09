@@ -16,7 +16,8 @@ public class BDFoodTruck extends BD{
     private static final String INSERT_FOOD_TRUCK
             = "INSERT INTO foodtruck(camion, truckid)"
             + "VALUES (?,?)"
-            + "on conflict do nothing";
+            + "ON CONFLICT(truckid)"
+            + "DO UPDATE SET camion = EXCLUDED.camion";
 
     private static final String SELECT_DATE
             = "SELECT * FROM foodtruck NATURAL JOIN pointdevente WHERE heure_debut >= ? AND heure_fin <= ? ;";
