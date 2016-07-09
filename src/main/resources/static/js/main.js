@@ -28,7 +28,9 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
             var json = JSON.parse(xhttp.responseText);
             markerDelete();
             for (var iter = 0; iter < json.length; iter++) {
-                var marker = L.marker([json[iter].geometry.coordinates[1], json[iter].geometry.coordinates[0]]).addTo(mymap)
+                var marker = L.marker([json[iter].geometry.coordinates[1], json[iter].geometry.coordinates[0]])
+                        .on('click', addVelo)
+                        .addTo(mymap)
                         .bindPopup('Nom: ' + json[iter].properties.Camion +
                                 '<br> Lieu: ' + json[iter].properties.Lieu +
                                 '<br> Date: ' + json[iter].properties.Date +
@@ -42,6 +44,10 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
     xhttp.open("GET", "/horaires-camions?du=" + start + "&au=" + end, true);
     xhttp.send();
 });
+
+function addVelo(e){
+    mymap.setView(e.latlng, 16)
+}
 
 function markerDelete() {
     for (i = 0; i < markers.length; i++) {
