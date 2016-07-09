@@ -8,17 +8,11 @@ import ca.uqam.projet.resources.*;
 import ca.uqam.projet.service.BDAncrageVelo;
 import ca.uqam.projet.service.BDBixi;
 
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
 public class FoodtruckController {
-
-    @Autowired
-    FoodTruckList foodTruckList;
-    @Autowired
-    BixiList bixiList;
 
     @RequestMapping(value = "/horaires-camions", method = RequestMethod.GET)
     public List<FoodTruck> getFoodTruckList(String du, String au) {
