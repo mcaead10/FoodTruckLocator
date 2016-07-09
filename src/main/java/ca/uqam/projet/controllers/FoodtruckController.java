@@ -25,9 +25,9 @@ public class FoodtruckController {
     }
 
     @RequestMapping(value = "/bixi", method = RequestMethod.GET)
-    public List<Bixi> getBixiList(float latitude, float longitude) {
+    public List<Bixi> getBixiList(float longitude, float latitude) {
         System.out.println("latitude: " + latitude);
         System.out.println("longitude: " + longitude);
-        return null;
+        return BDBixi.Select(longitude, latitude);
     }
 }

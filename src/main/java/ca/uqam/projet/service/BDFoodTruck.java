@@ -53,7 +53,6 @@ public class BDFoodTruck extends BD{
             CloseConnection(ps);
         }
         diconnect(conn);
-        System.out.println(list);
         return list;
     }
 

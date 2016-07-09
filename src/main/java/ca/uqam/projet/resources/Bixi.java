@@ -23,6 +23,16 @@ public class Bixi {
         this.emplacementDisponible = Integer.parseInt(element.getElementsByTagName("nbEmptyDocks").item(0).getTextContent());
     }
 
+    public Bixi(int id, String name, float longitude, float latitude, boolean ouvert, int veloDisponible, int emplacementDisponible) {
+        this.id = id;
+        this.name = name;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.ouvert = ouvert;
+        this.veloDisponible = veloDisponible;
+        this.emplacementDisponible = emplacementDisponible;
+    }
+
     public int getId() {
         return id;
     }
