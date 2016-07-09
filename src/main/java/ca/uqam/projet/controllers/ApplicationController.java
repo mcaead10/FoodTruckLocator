@@ -12,12 +12,14 @@ public class ApplicationController {
 
   @Autowired FoodTruckList foodTruckList;
   @Autowired BixiList bixiList;
+  @Autowired AncrageVeloList ancrageVeloList;
 
 
   @RequestMapping("/")
   public String index(Model model) {
     model.addAttribute("horaires-camions", foodTruckList.getFoodTruckList());
     model.addAttribute("bixi", bixiList.getBixiList());
+    model.addAttribute("ancragVelo", ancrageVeloList.getAncrageVelosList());
     return "index";
   }
 }

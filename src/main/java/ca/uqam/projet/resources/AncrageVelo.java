@@ -9,6 +9,10 @@ public class AncrageVelo {
         this.longitude = Float.parseFloat(longitude);
         this.latitude = Float.parseFloat(latitude);
     }
+    public AncrageVelo(float longitude, float latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
     public float getLongitude() {
         return longitude;

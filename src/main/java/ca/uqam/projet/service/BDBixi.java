@@ -21,7 +21,7 @@ public class BDBixi extends BD {
 
     private static final String SELECT_PROCHE
             = "SELECT *,ST_X(geog::geometry) AS longitude, ST_Y(geog::geometry) AS latitude "
-            + "FROM  bixi where  ST_Distance( geog, ST_GeographyFromText('POINT(' || ? || ' ' || ? || ')')) < 200 ;";
+            + "FROM  bixi where  ST_Distance( geog, ST_GeographyFromText('POINT(' || ? || ' ' || ? || ')')) <= 200 ;";
 
     public static void insertAll(BixiList bixiList) {
         Connection conn = connect();
@@ -31,17 +31,16 @@ public class BDBixi extends BD {
         diconnect(conn);
     }
 
-    public static List<Bixi> Select(float longiture, float latitude) {
+    public static List<Bixi> Select(float longitude, float latitude) {
         List<Bixi> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection conn = connect();
         try {
             ps = conn.prepareStatement(SELECT_PROCHE);
-            ps.setFloat(1, longiture);
+            ps.setFloat(1, longitude);
             ps.setFloat(2, latitude);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getString("name"));
                 list.add(new Bixi(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getFloat("longitude"),

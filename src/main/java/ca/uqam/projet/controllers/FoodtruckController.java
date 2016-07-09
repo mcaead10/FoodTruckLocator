@@ -5,6 +5,7 @@ import java.util.*;
 
 import ca.uqam.projet.repositories.*;
 import ca.uqam.projet.resources.*;
+import ca.uqam.projet.service.BDAncrageVelo;
 import ca.uqam.projet.service.BDBixi;
 
 import org.springframework.beans.factory.annotation.*;
@@ -26,8 +27,11 @@ public class FoodtruckController {
 
     @RequestMapping(value = "/bixi", method = RequestMethod.GET)
     public List<Bixi> getBixiList(float longitude, float latitude) {
-        System.out.println("latitude: " + latitude);
-        System.out.println("longitude: " + longitude);
         return BDBixi.Select(longitude, latitude);
+    }
+    
+    @RequestMapping(value = "/ancragevelo", method = RequestMethod.GET)
+    public List<AncrageVelo> getAncrageVeloList(float longitude, float latitude) {
+        return BDAncrageVelo.Select(longitude, latitude);
     }
 }
