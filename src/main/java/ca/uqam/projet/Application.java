@@ -1,31 +1,32 @@
 package ca.uqam.projet;
 
 import ca.uqam.projet.repositories.AncrageVeloList;
-import ca.uqam.projet.service.BDFoodTruck;
 import ca.uqam.projet.repositories.BixiList;
 import ca.uqam.projet.repositories.FoodTruckList;
 import ca.uqam.projet.resources.AncrageVelo;
 import ca.uqam.projet.resources.Bixi;
 import ca.uqam.projet.service.BDAncrageVelo;
 import ca.uqam.projet.service.BDBixi;
+import ca.uqam.projet.service.BDFoodTruck;
 import com.opencsv.CSVReader;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.w3c.dom.Document;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @SpringBootApplication
 @EnableScheduling

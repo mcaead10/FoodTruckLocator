@@ -1,9 +1,17 @@
-h1 { margin-right: 10px; color: orange; }
-
-#global{
-    width:100%;
+h1 {
+    margin-right: 10px;
+    color: orange;
 }
-#gauche{
+
+h4, input{
+    display: inline;
+}
+
+#global {
+    width: 100%;
+}
+
+#gauche {
     display: inline-block;
 }
 
@@ -11,27 +19,27 @@ h1 { margin-right: 10px; color: orange; }
     vertical-align: top;
 }
 
-#global #gauche, #gaucheGlobal{
-    float:left;
+#global #gauche, #gaucheGlobal {
+    float: left;
 }
 
-#gaucheGlobal{
-    width:20vw;
-    background-color:red;
+#gaucheGlobal {
+    width: 20vw;
 }
 
-#mapid{
+#mapid {
     height: 80vh;
     width: 75vw;
 }
 
-#btn-valid{
+#btn-valid {
     width: 20vw;
 }
-#startDate, #endDate, #lsd, #led{
+
+#startDate, #endDate, #lsd, #led {
     width: 9vw;
 }
 
-#header{
+#header {
     height: 15vh;
 }

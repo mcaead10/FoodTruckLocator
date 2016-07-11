@@ -4,35 +4,50 @@
 <head>
     <title>FoodTruck Locator</title>
     <style type="text/css"></style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
     <link rel="stylesheet" href="css/mystyle.css"/>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
     <link rel="icon" href="foodtruck.png"/>
 </head>
 <body>
-<div id="header">
-    <h1 align="center">FoodTruck and Bixi Locator</h1>
-    <h2>Recherche</h2>
-</div>
 <form>
     <div id="global">
         <div id="gaucheGlobal">
+            <h2>Recherche</h2>
             <div id="gauche">
                 <legend id="lsd" for="startDate">Date debut :</legend>
                 <legend id="led" for="endDate">Date fin :</legend>
             </div>
-
             <div id="droite">
                 <input type="date" id="startDate"/>
                 <input type="date" id="endDate"/>
             </div>
-            <button id="btn-valid">Rechercher</button>
+            <h4>Affichage : </h4>
+            <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
+            <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
+            </input>
+            <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
+            <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;" align="center"/>
+            </input>
+            <button id="btn-valid" type="button" class="btn btn-lg btn-primary">Rechercher</button>
         </div>
-        <div id="droiteGlobal">
-            <div id='mapid' class='map'></div>
-        </div>
+    </div>
+    <div id="droiteGlobal">
+        <h1 align="center">FoodTruck and Bixi Locator</h1>
+        <div id='mapid' class='map'></div>
     </div>
 </form>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
