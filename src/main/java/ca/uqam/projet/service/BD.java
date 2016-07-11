@@ -14,7 +14,7 @@ public class BD {
                     .getConnection("jdbc:postgresql://localhost:5432/projet",
                             "postgres", "collin");
             conn.setAutoCommit(true);
-            System.out.println("Opened database successfully");
+            //System.out.println("Opened database successfully");
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -27,7 +27,7 @@ public class BD {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
                 conn = null;
-                System.out.println("Closed database successfully");
+               // System.out.println("Closed database successfully");
             }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

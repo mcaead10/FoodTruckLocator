@@ -34,34 +34,54 @@ var ancrageIcon = L.icon({
     popupAnchor: [0, -10]
 });
 
-document.getElementById("btn-valid").addEventListener("click", function(e) {
+document.getElementById("btn-valid").addEventListener("click", function (e) {
     e.preventDefault();
     var start = document.getElementById("startDate").value;
     var end = document.getElementById("endDate").value;
 
-    if(start > end){
+    if (start > end) {
         window.alert("Les dates debut et fin sont inversé.");
-    }else if (!start || !end)
+    } else if (!start || !end)
     {
         alert("Format de date incorect");
         return;
     }
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var json = JSON.parse(xhttp.responseText);
             markerDeleteAll();
             for (var iter = 0; iter < json.length; iter++) {
-                var marker = L.marker([json[iter].geometry.coordinates[1], json[iter].geometry.coordinates[0]],
-                        {icon: foodTruckIcon})
-                        .on('click', addVelo)
-                        .addTo(mymap)
-                        .bindPopup('Nom: ' + json[iter].properties.Camion +
+                for (var i = 0; i < markersFD.length; i++) {
+                    var exist = markersFD[i].getLatLng().lat === json[iter].geometry.coordinates[1] &&
+                            markersFD[i].getLatLng().lng === json[iter].geometry.coordinates[0];
+                    
+                    if (exist)
+                    {
+                        var last = markersFD[i].getPopup().getContent();
+                        markersFD[i].bindPopup(last + '<br>' +
+                                '<br> <b> Nom: ' + json[iter].properties.Camion + '</b>' +
                                 '<br> Lieu: ' + json[iter].properties.Lieu +
                                 '<br> Date: ' + json[iter].properties.Date +
                                 '<br> Heure de début: ' + json[iter].properties.Heure_debut +
-                                '<br> Heure de fin: ' + json[iter].properties.Heure_fin);
-                markersFD.push(marker);
+                                '<br> Heure de fin: ' + json[iter].properties.Heure_fin,
+                        {maxHeight: 100});
+                        break;
+                    }
+                }
+                if (!exist) {
+                    var marker = L.marker([json[iter].geometry.coordinates[1], json[iter].geometry.coordinates[0]],
+                            {icon: foodTruckIcon})
+                            .on('click', addVelo)
+                            .addTo(mymap)
+                            .bindPopup('<b>Nom: ' + json[iter].properties.Camion + '</b>' +
+                                    '<br> Lieu: ' + json[iter].properties.Lieu +
+                                    '<br> Date: ' + json[iter].properties.Date +
+                                    '<br> Heure de début: ' + json[iter].properties.Heure_debut +
+                                    '<br> Heure de fin: ' + json[iter].properties.Heure_fin, 
+                            {maxHeight: 100});
+                    markersFD.push(marker);
+                }
             }
         }
     };
@@ -74,7 +94,7 @@ function addVelo(e) {
     mymap.setView(e.latlng, 16);
 
     var xhttpBixi = new XMLHttpRequest();
-    xhttpBixi.onreadystatechange = function() {
+    xhttpBixi.onreadystatechange = function () {
         if (xhttpBixi.readyState === 4 && xhttpBixi.status === 200) {
             var json = JSON.parse(xhttpBixi.responseText);
             for (var iter = 0; iter < json.length; iter++) {
@@ -92,7 +112,7 @@ function addVelo(e) {
     };
 
     var xhttpAncrage = new XMLHttpRequest();
-    xhttpAncrage.onreadystatechange = function() {
+    xhttpAncrage.onreadystatechange = function () {
         if (xhttpAncrage.readyState === 4 && xhttpAncrage.status === 200) {
             var json = JSON.parse(xhttpAncrage.responseText);
             for (var iter = 0; iter < json.length; iter++) {
