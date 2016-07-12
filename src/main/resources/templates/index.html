@@ -17,30 +17,52 @@
 </head>
 <body>
 <form>
-    <div id="global">
-        <div id="gaucheGlobal">
-            <h2>Recherche</h2>
-            <div id="gauche">
-                <legend id="lsd" for="startDate">Date debut :</legend>
-                <legend id="led" for="endDate">Date fin :</legend>
-            </div>
-            <div id="droite">
-                <input type="date" id="startDate"/>
-                <input type="date" id="endDate"/>
-            </div>
-            <h4>Affichage : </h4>
-            <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
-            <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
-            </input>
-            <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
-            <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;" align="center"/>
-            </input>
-            <button id="btn-valid" type="button" class="btn btn-lg btn-primary">Rechercher</button>
+    <div id="global" class="container">
+        <div class="row">
+            <h1 align="center">FoodTruck and Bixi Locator</h1>
+            <br/>
+            <br/>
         </div>
-    </div>
-    <div id="droiteGlobal">
-        <h1 align="center">FoodTruck and Bixi Locator</h1>
-        <div id='mapid' class='map'></div>
+        <div class="row">
+            <div id="gaucheGlobal" class="col-sm-2">
+                <br/>
+                <h2>Recherche</h2>
+                <br/>
+                <br/>
+                <div id="dateDebut" class="container row">
+                    <div class="col-sm-1">
+                        <h5 id="lsd" for="startDate">Date debut :</h5>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="date" id="startDate"/>
+                        <br/>
+                    </div>
+                </div>
+                <div id="dateFin" class="container row">
+                    <div class="col-sm-1">
+                        <h5 id="led" for="endDate">Date fin :</h5>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="date" id="endDate"/>
+                    </div>
+                    <br/>
+                </div>
+                <br/>
+                <br/>
+                <h4>Affichage : </h4>
+                <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
+                <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
+                </input>
+                <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
+                <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;" align="center"/>
+                </input>
+                <button id="btn-valid" type="button" class="btn btn-md btn-primary search-btn">Rechercher</button>
+            </div>
+            <div id="droiteGlobal" class="col-sm-8">
+
+                <div id='mapid' class='map'></div>
+            </div>
+        </div>
     </div>
 </form>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>

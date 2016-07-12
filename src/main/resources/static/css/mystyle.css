@@ -43,3 +43,8 @@ h4, input{
 #header {
     height: 15vh;
 }
+
+.search-btn {
+    max-width: 80px;
+    font-size: 80%;
+}
