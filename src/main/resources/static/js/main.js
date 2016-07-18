@@ -46,6 +46,20 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
         alert("Format de date incorect");
         return;
     }
+    ajouterMarqueur(start, end);
+});
+
+function afficherNombreCamion(nombreCamion) {
+    var element = document.getElementById("nbFoodTruck");
+    var para = document.createElement("p");
+    para.id = "p1";
+    var node = document.createTextNode("Nombre de FoodTruck : " + nombreCamion);
+    var child = document.getElementById("p1");
+    para.appendChild(node);
+    element.replaceChild(para, child);
+}
+
+function ajouterMarqueur(start, end) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
@@ -85,10 +99,11 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
                 }
             }
         }
+        afficherNombreCamion(json.length)
     };
     xhttp.open("GET", "/horaires-camions?du=" + start + "&au=" + end, true);
     xhttp.send();
-});
+}
 
 function addVelo(e) {
     markerDeleteVelo();
