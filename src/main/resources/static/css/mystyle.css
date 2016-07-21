@@ -29,7 +29,7 @@ h4, input{
 
 #mapid {
     height: 80vh;
-    width: 75vw;
+    width: 70vw;
 }
 
 #btn-valid {
@@ -37,7 +37,7 @@ h4, input{
 }
 
 #startDate, #endDate, #lsd, #led {
-    width: 9vw;
+    max-width: 135px;
 }
 
 #header {
@@ -45,6 +45,6 @@ h4, input{
 }
 
 .search-btn {
-    max-width: 80px;
+    max-width: 100px;
     font-size: 80%;
 }
