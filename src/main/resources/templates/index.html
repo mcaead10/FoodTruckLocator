@@ -1,88 +1,90 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>FoodTruck Locator</title>
-    <style type="text/css"></style>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+    <head>
+        <title>FoodTruck Locator</title>
+        <style type="text/css"></style>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+              integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="css/mystyle.css"/>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
-    <link rel="icon" href="icon/foodtruckIcon.png"/>
-</head>
-<body>
-<form>
-    <div id="global" class="container">
-        <div class="row">
-            <h1 align="center">FoodTruck and Bixi Locator</h1>
-            <br/>
-            <br/>
-        </div>
-        <div class="row">
-            <div id="gaucheGlobal" class="col-sm-2">
-                <h2>Recherche</h2>
-                <h4>Affichage : </h4>
-                <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
-                <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
-                </input>
-                <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
-                <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;"
-                     align="center"/>
-                </input>
-                <br/><br/>
-                <div id="dateDebut" class="container row">
-                    <div class="col-sm-1">
-                        <h5 id="lsd" for="startDate">Date debut :</h5>
-                    </div>
-                    <div class="col-sm-1">
-                        <input type="date" id="startDate"/>
-                        <br/>
-                    </div>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+              integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="css/mystyle.css"/>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
+        <link rel="icon" href="icon/foodtruckIcon.png"/>
+    </head>
+    <body>
+        <form>
+            <div id="global" class="container">
+                <div class="row">
+                    <h1 align="center">FoodTruck and Bixi Locator</h1>
+                    <br/>
+                    <br/>
                 </div>
-                <div id="dateFin" class="container row">
-                    <div class="col-sm-1">
-                        <h5 id="led" for="endDate">Date fin :</h5>
-                    </div>
-                    <div class="col-sm-1">
-                        <input type="date" id="endDate"/>
-                        <br/>
-                    </div>
-                </div>
-                <div id="nbFoodTruck">
-                    <p id="p1"><br/></p>
-                </div>
-                <div class="container row">
-                    <div class="col-sm-1">
+                <div class="row">
+                    <div id="gaucheGlobal" class="col-sm-2">
+                        <h2>Recherche</h2>
+                        <h4>Affichage : </h4>
+                        <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
+                        <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
+                        </input>
+                        <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
+                        <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;"
+                             align="center"/>
+                        </input>
+                        <br/><br/>
+                        <div id="dateDebut" class="container row">
+                            <div class="col-sm-1">
+                                <h5 id="lsd" for="startDate">Date debut :</h5>
+                            </div>
+                            <div class="col-sm-1">
+                                <input type="date" id="startDate"/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div id="dateFin" class="container row">
+                            <div class="col-sm-1">
+                                <h5 id="led" for="endDate">Date fin :</h5>
+                            </div>
+                            <div class="col-sm-1">
+                                <input type="date" id="endDate"/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div id="nbFoodTruck">
+                            <p id="p1"><br/></p>
+                        </div>
+                        <div class="container row">
+                            <div class="col-sm-1">
 
+                            </div>
+                            <div class="col-sm-1">
+                                <button id="btn-valid" type="button" class="btn btn-md btn-default search-btn">Rechercher
+                                </button>
+                                <br/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-1">
-                        <button id="btn-valid" type="button" class="btn btn-md btn-default search-btn">Rechercher
-                        </button>
-                        <br/>
+                    <div id="droiteGlobal" class="col-sm-8">
+                        <div class="col-sm-1">
+
+                        </div>
+                        <div class="col-sm-7">
+                            <div id='mapid' class='map'></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="droiteGlobal" class="col-sm-8">
-                <div class="col-sm-1">
-
-                </div>
-                <div class="col-sm-7">
-                    <div id='mapid' class='map'></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        </form>
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+                integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
-<script src="js/main.js"></script>
-</body>
+        <script src="js/main.js"></script>
+
+    </body>
 </html>
