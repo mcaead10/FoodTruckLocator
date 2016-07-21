@@ -45,6 +45,6 @@ h4, input{
 }
 
 .search-btn {
-    max-width: 100px;
+    min-width: 135px;
     font-size: 80%;
 }

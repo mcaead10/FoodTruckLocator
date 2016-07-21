@@ -26,7 +26,15 @@
         <div class="row">
             <div id="gaucheGlobal" class="col-sm-2">
                 <h2>Recherche</h2>
-                <br/>
+                <h4>Affichage : </h4>
+                <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
+                <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
+                </input>
+                <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
+                <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;"
+                     align="center"/>
+                </input>
+                <br/><br/>
                 <div id="dateDebut" class="container row">
                     <div class="col-sm-1">
                         <h5 id="lsd" for="startDate">Date debut :</h5>
@@ -45,28 +53,17 @@
                         <br/>
                     </div>
                 </div>
-                <br/>
-                <br/>
-                <h4>Affichage : </h4>
-                <input id="bixiCheckbox" type="checkbox" value="Bixi" checked="true">
-                <img src="icon/bixiIcon.png" alt="Afficher les Bixis" style="width:30px;height:30px;" align="center"/>
-                </input>
-                <input id="veloCheckbox" type="checkbox" value="velo" checked="true">
-                <img src="icon/ancrageIcon.png" alt="Afficher les ancrages" style="width:30px;height:30px;"
-                     align="center"/>
-                </input>
-                <br/>
-                <div class="row">
-                    <div class="col-sm-1"></div>
+                <div id="nbFoodTruck">
+                    <p id="p1"><br/></p>
+                </div>
+                <div class="container row">
+                    <div class="col-sm-1">
+
+                    </div>
                     <div class="col-sm-1">
                         <button id="btn-valid" type="button" class="btn btn-md btn-default search-btn">Rechercher
                         </button>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div id="nbFoodTruck" class="col-sm-2">
-                        <p id="p1"></p>
+                        <br/>
                     </div>
                 </div>
             </div>
