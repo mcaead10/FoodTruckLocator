@@ -11,7 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BDFoodTruck extends BD{
+public class BDFoodTruck extends BD {
 
     private static final String INSERT_FOOD_TRUCK
             = "INSERT INTO foodtruck(camion, truckid)"
@@ -28,16 +28,18 @@ public class BDFoodTruck extends BD{
             + "on conflict do nothing";
 
     private static final String TIMEZONE = "EDT 2016";
+    private static final String ENDTIME = " 23:59 ";
 
     public static List<FoodTruck> select(String dateDebut, String dateFin) {
 
         List<FoodTruck> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection conn = connect();
+        dateFin += ENDTIME + TIMEZONE;
         try {
             ps = conn.prepareStatement(SELECT_DATE);
             ps.setTimestamp(1, new java.sql.Timestamp(ConvertisseurDate.stringDate(dateDebut).getTime()));
-            ps.setTimestamp(2, new java.sql.Timestamp(ConvertisseurDate.stringDate(dateFin).getTime()));
+            ps.setTimestamp(2, new java.sql.Timestamp(ConvertisseurDate.stringTimestamp(dateFin).getTime()));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new FoodTruck(rs.getString("truckid"),
@@ -84,8 +86,6 @@ public class BDFoodTruck extends BD{
     }
 
     private static void insertPointDeVente(FoodTruck foodtruck, Connection conn) {
-        ////////est ce qu'il faut garder l'historique ou on peut delete la table a chaque ajout dans la bd?
-        //Solution..... on conflict do update??
 
         PreparedStatement ps = null;
         try {

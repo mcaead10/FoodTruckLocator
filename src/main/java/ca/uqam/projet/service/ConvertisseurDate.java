@@ -18,7 +18,6 @@ public class ConvertisseurDate {
     }
 
     private static Date convertStringDate(String date, SimpleDateFormat format) {
-        ////////est ce qu'il faut garder l'historique ou on peut delete la table a chaque ajout dans la bd?
         Date dateDebut = null; 
         try {
             dateDebut = format.parse(date);

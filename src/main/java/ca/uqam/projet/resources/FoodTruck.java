@@ -31,7 +31,4 @@ private Properties properties;
     public String toString() {
         return "FoodTruck{" + "geometry=" + geometry + ", properties=" + properties + '}';
     }
-
-
-
 }

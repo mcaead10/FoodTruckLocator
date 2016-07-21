@@ -64,6 +64,7 @@ function ajouterMarqueur(start, end) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var json = JSON.parse(xhttp.responseText);
+            var nombreCamion = json.length;
             markerDeleteAll();
             for (var iter = 0; iter < json.length; iter++) {
                 var exist = false;
@@ -98,8 +99,9 @@ function ajouterMarqueur(start, end) {
                     markersFD.push(marker);
                 }
             }
+            afficherNombreCamion(nombreCamion);
         }
-        afficherNombreCamion(json.length)
+
     };
     xhttp.open("GET", "/horaires-camions?du=" + start + "&au=" + end, true);
     xhttp.send();
