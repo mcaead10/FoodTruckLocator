@@ -5,7 +5,7 @@
 - Java 1.8
 - Maven 3
 
-## Création des bases de données
+## Création de la base de données
 
     $ ./Database/resetdatabase.sh
 
