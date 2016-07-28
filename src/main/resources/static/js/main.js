@@ -41,6 +41,7 @@ document.getElementById("btn-valid").addEventListener("click", function (e) {
 
     if (start > end) {
         alert("Les dates debut et fin sont inversé.");
+        return;
     } else if (!start || !end)
     {
         alert("Format de date incorect");

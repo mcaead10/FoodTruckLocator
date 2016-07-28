@@ -26,6 +26,10 @@ public class BDFoodTruck extends BD {
             = "INSERT INTO pointdevente(truckid, lieu, longitude, latitude, heure_debut, heure_fin)"
             + "VALUES (?,?,?,?,?,?)"
             + "on conflict do nothing";
+    
+    private static final String DELETE_POINT_DE_VENTE = "delete from pointdevente ;";
+    
+    private static final String DELETE_FOOD_TRUCK = "delete from foodtruck ;";
 
     private static final String TIMEZONE = "EDT 2016";
     private static final String ENDTIME = " 23:59 ";
@@ -61,12 +65,12 @@ public class BDFoodTruck extends BD {
 
     public static void insertAll(FoodTruckList foodTruckList) {
         Connection conn = connect();
+        deleteFoodTruck(conn);
         for (FoodTruck foodTruck : foodTruckList.getFoodTruckList()) {
             insertFoodTruck(foodTruck, conn);
             insertPointDeVente(foodTruck, conn);
         }
         diconnect(conn);
-
     }
 
     private static void insertFoodTruck(FoodTruck foodtruck, Connection conn) {
@@ -98,6 +102,21 @@ public class BDFoodTruck extends BD {
             ps.setTimestamp(6, new java.sql.Timestamp(foodtruck.getProperties().getHeureFinDate().getTime()));
             ps.executeUpdate();
 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            CloseConnection(ps);
+        }
+    }
+    
+    private static void deleteFoodTruck(Connection conn) {
+
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(DELETE_POINT_DE_VENTE);
+            ps.executeUpdate();
+            ps = conn.prepareStatement(DELETE_FOOD_TRUCK);
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
